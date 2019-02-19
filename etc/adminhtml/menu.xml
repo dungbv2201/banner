@@ -6,7 +6,6 @@
              title="Banner Manger"
              module="Dungbv_Banner"
              sortOrder="15"
-             action="banner"
              resource="Dungbv_Banner::banner_manager"
         />
         <add id="Dungbv_Banner::banner_index"

@@ -1,0 +1,12 @@
+@dungbvbanner-icons-admin__font-name-path: '@{baseDir}Dungbv_Banner/fonts/icomoon';
+@dungbvbanner-icons-admin__font-name : 'Banner';
+.lib-font-face(
+  @family-name:@dungbvbanner-icons-admin__font-name,
+  @font-path: @dungbvbanner-icons-admin__font-name-path,
+  @font-weight: normal,
+  @font-style: normal
+);
+.admin__menu .item-banner.parent.level-0 > a:before {
+  font-family: @dungbvbanner-icons-admin__font-name;
+  content: "\e904";
+} 
