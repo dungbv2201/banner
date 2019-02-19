@@ -1,0 +1,47 @@
+<?php
+/**
+ * @var \Magento\Framework\View\Element\Template $block
+ * @var \Dungbv\Banner\ViewModel\CmsPagesList $viewModel
+ */
+$viewModel = $block->getData('viewModel');
+
+?>
+<style>
+    .con {
+        float: left;
+        width: 100%;
+    }
+
+    .col-3 {
+        width: 30%;
+        margin-right: 10px;
+        float: left;
+    }
+</style>
+<div class="con">
+    <?php foreach ($viewModel->getItems() as $item): ?>
+        <div class="col-3">
+            <h3><?php echo $item['title'] ?></h3>
+            <img src="<?php echo $viewModel->getUrl() . $item['image'] ?>" alt="">
+        </div>
+    <?php endforeach; ?>
+</div>
+<div data-bind="scope: 'dungbv-component'">
+    <h2 data-bind="text: title">dsd</h2>
+</div>
+
+<script type="text/x-magento-init">
+    {
+    "*":{
+        "Magento_Ui/js/core/app":{
+            "components":{
+                "dungbv-component":{
+                    "component":"Dungbv_Banner/js/component",
+                    "title":"bui Van Đun"
+                    }
+                }
+            }
+        }
+    }
+
+</script>

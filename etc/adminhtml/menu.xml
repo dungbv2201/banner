@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Dungbv_Banner::banner"
+             title="Banner Manger"
+             module="Dungbv_Banner"
+             sortOrder="15"
+             action="banner"
+             resource="Dungbv_Banner::banner_manager"
+        />
+        <add id="Dungbv_Banner::banner_index"
+             title="List All Banner"
+             module="Dungbv_Banner"
+             sortOrder="1"
+             action="banner/index"
+             resource="Dungbv_Banner::banner_manager"
+             parent="Dungbv_Banner::banner"
+        />
+        <add id="Dungbv_Banner::banner_save"
+             title="Add New Banner"
+             module="Dungbv_Banner"
+             sortOrder="1"
+             action="banner/index/add"
+             resource="Dungbv_Banner::banner_save"
+             parent="Dungbv_Banner::banner"
+        />
+    </menu>
+</config>

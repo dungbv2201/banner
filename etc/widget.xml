@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<widgets xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Widget:etc/widget.xsd">
+    <widget id="dungbv_banner_list" class="Dungbv\Banner\Block\Banner\Widget\Banner" >
+        <label translate="true">Banner List</label>
+        <description translate="true">list of banner</description>
+        <parameters>
+            <parameter name="auto" xsi:type="select" visible="true"
+                       source_model="Magento\Config\Model\Config\Source\Yesno">
+                <label translate="true">Automatically transition</label>
+            </parameter>
+            <parameter name="speed" xsi:type="text" visible="true" required="true">
+                <label translate="true">Slide transition duran (in ms)</label>
+            </parameter>
+        </parameters>
+    </widget>
+</widgets>

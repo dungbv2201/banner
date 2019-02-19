@@ -1,0 +1,89 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Dungbv\Banner\Api\Data\BannerInterface"
+                type="Dungbv\Banner\Model\Banner"
+    />
+    <preference for="Dungbv\Banner\Api\BannerRepositoryInterface"
+                type="Dungbv\Banner\Model\BannerRepository"
+    />
+    <preference for="Dungbv\Banner\Api\Data\BannerSearchResultInterface"
+                type="Magento\Framework\Api\SearchResults"
+    />
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="banner_listing_data_source" xsi:type="string">
+                    Dungbv\Banner\Model\ResourceModel\Banner\Grid\Collection
+                </item>
+            </argument>
+        </arguments>
+    </type>
+    <virtualType name="Dungbv\Banner\Model\ResourceModel\Banner\Grid\Collection"
+                 type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">banner</argument>
+            <argument name="resourceModel" xsi:type="string">Dungbv\Banner\Model\ResourceModel\Banner</argument>
+        </arguments>
+    </virtualType>
+    <type name="Dungbv\Banner\Controller\Adminhtml\Index\Test">
+        <arguments>
+            <argument name="Dungbv\Banner\Controller\Adminhtml\Index\Hello" xsi:type="object">
+                Dungbv\Banner\Controller\Adminhtml\Index\Hello\Proxy
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Dungbv\Banner\Controller\Adminhtml\Index\Image\Upload">
+        <arguments>
+            <argument name="imageUploader" xsi:type="object">Dungbv\Banner\IndexImageUpload</argument>
+        </arguments>
+    </type>
+    <virtualType name="Dungbv\Banner\IndexImageUpload" type="Dungbv\Banner\Model\ImageUploader">
+        <arguments>
+            <argument name="baseTmpPath" xsi:type="string">banner/tmp/images</argument>
+            <argument name="basePath" xsi:type="string">banner/images</argument>
+            <argument name="allowedExtensions" xsi:type="array">
+                <item name="jpg" xsi:type="string">jpg</item>
+                <item name="jpeg" xsi:type="string">jpeg</item>
+                <item name="gif" xsi:type="string">gif</item>
+                <item name="png" xsi:type="string">png</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <!--<virtualType name="Dungbv\Banner\Model\Api\SearchCriteria\CollectionProcessor\BannerFilterProcessor"-->
+                 <!--type="Magento\Framework\Api\SearchCriteria\CollectionProcessor\FilterProcessor">-->
+        <!--<arguments>-->
+            <!--<argument name="customFilters" xsi:type="array">-->
+                <!--<item name="store_id" xsi:type="object">-->
+                    <!--Dungbv\Banner\Model\Api\SearchCriteria\CollectionProcessor\FilterProcessor\BannerStoreFilter-->
+                <!--</item>-->
+            <!--</argument>-->
+        <!--</arguments>-->
+    <!--</virtualType>-->
+
+    <!--<virtualType name="Dungbv\Banner\Model\Api\SearchCriteria\BannerCollectionProcessor"-->
+                 <!--type="Magento\Framework\Api\SearchCriteria\CollectionProcessor">-->
+        <!--<arguments>-->
+            <!--<argument name="processors" xsi:type="array">-->
+                <!--<item name="filters" xsi:type="object">-->
+                    <!--Dungbv\Banner\Model\Api\SearchCriteria\CollectionProcessor\FilterProcessor\BannerStoreFilter-->
+                <!--</item>-->
+                <!--<item name="sorting" xsi:type="object">-->
+                    <!--Magento\Framework\Api\SearchCriteria\CollectionProcessor\SortingProcessor-->
+                <!--</item>-->
+                <!--<item name="pagination" xsi:type="object">-->
+                    <!--Magento\Framework\Api\SearchCriteria\CollectionProcessor\PaginationProcessor-->
+                <!--</item>-->
+            <!--</argument>-->
+        <!--</arguments>-->
+    <!--</virtualType>-->
+    <!--<type name="Dungbv\Banner\Model\BannerRepository">-->
+        <!--<arguments>-->
+            <!--<argument name="collectionProcessor" xsi:type="object">-->
+                <!--Dungbv\Banner\Model\Api\SearchCriteria\BannerCollectionProcessor-->
+            <!--</argument>-->
+        <!--</arguments>-->
+    <!--</type>-->
+</config>
