@@ -59,22 +59,19 @@ class InlineEdit extends Action
         $error = false;
         $messages = [];
         $postItems = $this->getRequest()->getParam('items', []);
-
         if ($this->getRequest()->getParam('isAjax')) {
 
             if (!count($postItems)) {
                 $messages[] = __('Please correct the data sent.');
                 $error = true;
             } else {
-                foreach (array_keys($postItems) as $bannerId) {
-                    //$banner = $this->_bannerRepository->getById($bannerId);
-
+                foreach ($postItems as $key=>$value) {
                     try {
-                        $data=$this->banner->load($bannerId);
-                        $data->setData($postItems[(string) $bannerId]);
-                        $data->save();
+                        $data = $this->_bannerRepository->getById($key);
+                        $data->setData($value);
+                        $this->_bannerRepository->save($data);
                     } catch (\Exception $e) {
-                        $messages[] = '1212';
+                        $messages[] = 'không thể cập nhật banner';
                         $error = true;
                     }
                 }

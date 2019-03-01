@@ -156,12 +156,12 @@
                 <label translate="true">Title</label>
             </settings>
         </column>
-        <column name="thumbnail"
+        <column name="image"
                 class="Dungbv\Banner\Ui\Component\Listing\Columns\Thumbnail"
                 component="Magento_Ui/js/grid/columns/thumbnail" sortOrder="20">
             <settings>
                 <altField>title</altField>
-                <hasPreview>1</hasPreview>
+                <hasPreview>true</hasPreview>
                 <!--<addField>true</addField>-->
                 <label translate="true">Image</label>
                 <sortable>false</sortable>

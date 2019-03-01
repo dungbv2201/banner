@@ -2,16 +2,18 @@
 
 namespace Dungbv\Banner\Controller\Adminhtml\Index;
 
-
-use Dungbv\Banner\Model\BannerFactory;
+use Dungbv\Banner\Model\Banner;
 use Dungbv\Banner\Model\BannerRepository;
 use Dungbv\Banner\Model\ResourceModel\Banner\CollectionFactory;
 use Magento\Backend\App\Action;
 use Magento\Framework\App\Request\DataPersistorInterface;
 use Magento\Framework\Exception\LocalizedException;
-use Magento\Framework\UrlInterface;
 use Magento\Store\Model\StoreManagerInterface;
 
+/**
+ * Class Save
+ * @package Dungbv\Banner\Controller\Adminhtml\Index
+ */
 class Save extends Action
 {
     const ADMIN_RESOURCE = 'Dungbv_Banner::save';
@@ -23,6 +25,15 @@ class Save extends Action
     protected $_urlFolder = 'banner/images/';
     protected $_storeManager;
 
+    /**
+     * Save constructor.
+     * @param \Dungbv\Banner\Model\BannerFactory $banner
+     * @param StoreManagerInterface $storeManager
+     * @param CollectionFactory $collectionFactory
+     * @param BannerRepository $bannerRepository
+     * @param DataPersistorInterface $dataPersistor
+     * @param Action\Context $context
+     */
     public function __construct(
         \Dungbv\Banner\Model\BannerFactory $banner,
         StoreManagerInterface $storeManager,
@@ -66,44 +77,40 @@ class Save extends Action
     public function execute()
     {
         $data           = $this->getRequest()->getPostValue();
-        $resultRedirect = $this->resultRedirectFactory->create();
+
         if ($data) {
-            if (empty($data['id'])) {
-                $data['id'] = null;
+            if (empty($data[Banner::BANNER_ID])) {
+                $data[Banner::BANNER_ID] = null;
             }
             $model = $this->_banner->create();
-            $id    = $this->getRequest()->getParam('id');
+            $id    = $this->getRequest()->getParam(Banner::BANNER_ID_RQ);
             if ($id) {
                 try {
                     $model = $this->_bannerRepository->getById($id);
                 } catch (LocalizedException $e) {
                     $this->messageManager->addErrorMessage(__('This banner no longer exists.'));
-                    return $resultRedirect->setPath('*/*/');
+                    return $this->_redirect(Banner::URI_PATH_INDEX);
                 }
             }
-
             $model->setData($this->_filterBannerPostData($data));
             try {
                 $this->_bannerRepository->save($model);
-//                if (file_exists($urlFile)){
-//                    unlink($urlFile);
-//                }
                 $this->messageManager->addSuccessMessage(__('You saved the banner.'));
                 $this->_dataPersistor->clear('banner');
                 if ($this->getRequest()->getParam('back')) {
-                    return $resultRedirect->setPath('*/*/edit', ['id' => $model->getId()]);
+                    return $this->_redirect(Banner::URI_PATH_Edit, [Banner::BANNER_ID_RQ => $model->getId()]);
                 }
-                return $resultRedirect->setPath('*/*/');
             } catch (LocalizedException $e) {
                 $this->messageManager->addErrorMessage($e->getMessage());
             } catch (\Exception $e) {
                 $this->messageManager->addExceptionMessage($e, __('Something went wrong while saving the banner.'));
+                $this->_dataPersistor->set('banner', $data);
+                if($id){
+                    return $this->_redirect(Banner::URI_PATH_Edit, [Banner::BANNER_ID_RQ => $id]);
+                }
+                return $this->_redirect(Banner::URI_PATH_ADD);
             }
-
-            $this->_dataPersistor->set('banner', $data);
-            return $resultRedirect->setPath('*/*/edit', ['id' => $this->getRequest()->getParam('id')]);
         }
-        return $resultRedirect->setPath('*/*/');
-
+        return $this->_redirect(Banner::URI_PATH_INDEX);
     }
 }

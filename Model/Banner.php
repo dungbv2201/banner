@@ -6,12 +6,17 @@ namespace Dungbv\Banner\Model;
 use Dungbv\Banner\Api\Data\BannerInterface;
 use Magento\Framework\Model\AbstractModel;
 
+/**
+ * Class Banner
+ * @package Dungbv\Banner\Model
+ */
 class Banner extends AbstractModel implements BannerInterface
 {
     const  STATUS_ENABLED  = 1;
     const  STATUS_DISABLED = 0;
     const  NOROUTE_PAGE_ID = 'no-route';
     const  PAGE_SIZE        = 3;
+    const BASE_PATH_IMAGE = 'banner/images/';
 
     protected function _construct()
     {

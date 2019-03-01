@@ -78,7 +78,7 @@ class BannerRepository implements BannerRepositoryInterface
             $this->_resource->delete($banner);
         } catch (\Exception $exception) {
             throw new CouldNotDeleteException(__(
-                'Could not delete the page: %1',
+                'Could not delete the banner: %1',
                 $exception->getMessage()
             ));
         }

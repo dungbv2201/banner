@@ -15,11 +15,7 @@ class Collection extends AbstractCollection
     {
         $this->_init(Banner::class,\Dungbv\Banner\Model\ResourceModel\Banner::class);
     }
-    /**
-     * Add filter by store
-     *
-     * @param int|array|\Magento\Store\Model\Store $store
-     * @param bool $withAdmin
-     * @return $this
-     */
+    public function init($model,$resourceModel){
+        $this->_init($model,$resourceModel);
+    }
 }

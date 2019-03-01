@@ -4,22 +4,32 @@ namespace Dungbv\Banner\Controller\Adminhtml\Index;
 
 
 use Magento\Backend\App\Action;
-use Magento\Framework\View\Result\PageFactory;
 
 
+
+/**
+ * Class Add
+ * @package Dungbv\Banner\Controller\Adminhtml\Index
+ */
 class Add extends Action
 {
     const ADMIN_RESOURCE = 'Dungbv_Banner::save';
-    protected $_pageFactory;
     protected $_banner;
     protected $_storeManager;
 
-    public function __construct(Action\Context $context, PageFactory $pageFactory)
+    /**
+     * Add constructor.
+     * @param Action\Context $context
+     *
+     */
+    public function __construct(Action\Context $context)
     {
-        $this->_pageFactory = $pageFactory;
         parent::__construct($context);
     }
 
+    /**
+     * @return \Magento\Framework\App\ResponseInterface|\Magento\Framework\Controller\ResultInterface|void
+     */
     public function execute()
     {
         $this->_forward('edit');

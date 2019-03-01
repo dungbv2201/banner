@@ -63,11 +63,11 @@ class DataProvider extends AbstractDataProvider
             $data['image'][0]['url']  = $this->_storeManager
                     ->getStore()->getBaseUrl(UrlInterface::URL_TYPE_MEDIA) . 'banner/images/' . $imageName;
             $data['image'][0]['name'] = $imageName;
+            $data['image'][0]['size'] = 0;
 
             $this->_loadedData[$banner->getId()] = $data;
 
         }
-
         $data = $this->_dataPersistor->get('banner');
         if (!empty($data)) {
             $banner = $this->collection->getNewEmptyItem();
@@ -75,7 +75,6 @@ class DataProvider extends AbstractDataProvider
             $this->_loadedData[$banner->getData('id')] = $banner->getData();
             $this->_dataPersistor->clear('banner');
         }
-
         return $this->_loadedData;
     }
 }

@@ -14,6 +14,10 @@
         <item name="template" xsi:type="string">templates/form/collapsible</item>
     </argument>
     <settings>
+        <!--<layout>-->
+            <!--<navContainerName>left</navContainerName>-->
+            <!--<type>tabs</type>-->
+        <!--</layout>-->
         <buttons>
             <button name="save_and_continue" class="Dungbv\Banner\Block\Adminhtml\Banner\Edit\SaveAndContinueButton"/>
             <button name="save" class="Dungbv\Banner\Block\Adminhtml\Banner\Edit\SaveButton"/>
@@ -42,7 +46,7 @@
         <settings>
             <collapsible>true</collapsible>
             <opened>true</opened>
-            <label>Banner</label>
+            <label>General</label>
         </settings>
         <field name="banner_id" formElement="input">
             <argument name="data" xsi:type="array">
@@ -93,7 +97,7 @@
                 <required>true</required>
                 <scopeLabel>[tiêu đề của banner]</scopeLabel>
                 <validation>
-                    <rule name="required-entry" xsi:type="boolean">false</rule>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
                 </validation>
                 <label translate="true">Banner Title</label>
                 <dataType>text</dataType>

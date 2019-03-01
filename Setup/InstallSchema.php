@@ -8,8 +8,17 @@ use Magento\Framework\Setup\InstallSchemaInterface;
 use Magento\Framework\Setup\ModuleContextInterface;
 use Magento\Framework\Setup\SchemaSetupInterface;
 
+/**
+ * Class InstallSchema
+ * @package Dungbv\Banner\Setup
+ */
 class InstallSchema implements InstallSchemaInterface
 {
+    /**
+     * @param SchemaSetupInterface $setup
+     * @param ModuleContextInterface $context
+     * @return string|void
+     */
     public function install(SchemaSetupInterface $setup, ModuleContextInterface $context)
     {
         $installer = $setup;
@@ -65,7 +74,7 @@ class InstallSchema implements InstallSchemaInterface
                     ->setOption('charset','utf8');
                 $conn->createTable($table);
             }catch (\Zend_Db_Exception $e){
-                return $e->getMessage();
+                 $e->getMessage();
             }
         }
         $installer->endSetup();

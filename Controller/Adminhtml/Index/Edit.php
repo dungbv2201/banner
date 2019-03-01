@@ -28,7 +28,7 @@ class Edit extends Action
     /**
      * @var string $title
      */
-    protected $_title = 'Edit Banner';
+    protected $_title = 'Add New Banner';
     protected $_registry;
 
     public function __construct(Action\Context $context,
@@ -50,22 +50,19 @@ class Edit extends Action
      */
     public function execute()
     {
-
         $resultPage = $this->_pageFactory->create();
         $id         = $this->getRequest()->getParam('id');
         if ($id) {
             try {
-                $banner = $this->_bannerRepo->getById($id);
+                $this->_bannerRepo->getById($id);
+                $this->_title ='Edit banner';
             } catch (LocalizedException $exception) {
                 $this->getMessageManager()->addErrorMessage(__('This banner no longer exists.'));
                 return $this->_redirect('*/*/');
             }
-            $resultPage->getConfig()->getTitle()->prepend(__($this->_title));
-        } else {
-            $this->_title = __("Add new Banner");
-            $resultPage->getConfig()->getTitle()->prepend(__($this->_title));
         }
-//        $this->_registry->register('banner', $banner);
+        $this->_setActiveMenu("Dungbv_Banner::banner");
+        $resultPage->getConfig()->getTitle()->prepend(__($this->_title));
         return $resultPage;
     }
 

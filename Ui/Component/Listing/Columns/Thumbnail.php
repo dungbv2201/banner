@@ -54,7 +54,6 @@ class Thumbnail extends \Magento\Ui\Component\Listing\Columns\Column
                 $item[$fieldName . '_orig_src'] = $url . $item['image'];
             }
         }
-
         return $dataSource;
     }
 
